@@ -1,0 +1,21 @@
+﻿CREATE TABLE [Application].[Task](
+    [TaskID]                INT                                         CONSTRAINT [DF_Application_Task_TaskID] DEFAULT (NEXT VALUE FOR [Application].[sq_Task]) NOT NULL,
+    [Title]                 NVARCHAR(50)                                NOT NULL,
+    [Description]           NVARCHAR(2000)                              NOT NULL,
+    [DueDateTime]           DATETIME2(7)                                NULL,
+    [ReminderDateTime]      DATETIME2(7)                                NULL,
+    [CompletedDateTime]     DATETIME2(7)                                NULL,
+    [AssignedTo]            INT                                         NULL,
+    [TaskPriorityID]        INT                                         NOT NULL,
+    [TaskStatusID]          INT                                         NOT NULL,
+    [RowVersion]            ROWVERSION                                  NULL,
+    [LastEditedBy]          INT                                         NOT NULL,
+    [ValidFrom]             DATETIME2 (7) GENERATED ALWAYS AS ROW START NOT NULL,
+    [ValidTo]               DATETIME2 (7) GENERATED ALWAYS AS ROW END   NOT NULL,
+    CONSTRAINT [PK_Task] PRIMARY KEY ([TaskID]),
+    CONSTRAINT [FK_Task_TaskPriority_TaskPriorityID] FOREIGN KEY ([TaskPriorityID]) REFERENCES [Application].[TaskPriority] ([TaskPriorityID]),
+    CONSTRAINT [FK_Task_TaskStatus_TaskStatusID] FOREIGN KEY ([TaskStatusID]) REFERENCES [Application].[TaskStatus] ([TaskStatusID]),
+    CONSTRAINT [FK_Task_User_LastEditedBy] FOREIGN KEY ([LastEditedBy]) REFERENCES [Identity].[User] ([UserID]),
+    CONSTRAINT [FK_Task_User_AssignedTo] FOREIGN KEY ([AssignedTo]) REFERENCES [Identity].[User] ([UserID]),
+    PERIOD FOR SYSTEM_TIME (ValidFrom, ValidTo)
+) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [Application].[TaskHistory]));
