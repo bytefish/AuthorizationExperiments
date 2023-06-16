@@ -2,8 +2,6 @@
 
 using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Data.Common;
-using System.Dynamic;
 
 namespace AuthorizationExperiment.Api.Base.Query
 {
@@ -74,35 +72,6 @@ namespace AuthorizationExperiment.Api.Base.Query
             }
 
             return query;
-        }
-
-        /// <summary>
-        /// Queries the database and returns an <see cref="ExpandoObject"/>.
-        /// </summary>
-        /// <param name="query">Query to execute</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel asynchronous processing</param>
-        /// <returns>The results in an <see cref="ExpandoObject"/> for dynamic access</returns>
-        public static async Task<List<dynamic>> AsExpando(this SqlQuery query, CancellationToken cancellationToken)
-        {
-            var dataTable = await query
-                .ExecuteDataTableAsync(cancellationToken)
-                .ConfigureAwait(false);
-
-            List<dynamic> expandoList = new List<dynamic>();
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                var expandoDict = new ExpandoObject() as IDictionary<string, object>;
-
-                foreach (DataColumn col in dataTable.Columns)
-                {
-                    expandoDict.Add(col.ToString(), row[col.ColumnName].ToString()!);
-                }
-
-                expandoList.Add(expandoDict);
-            }
-
-            return expandoList;
         }
     }
 }

@@ -1,3 +1,5 @@
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
 using AuthorizationExperiment.Api.Services.Application;
 using Microsoft.AspNetCore.Mvc;
 

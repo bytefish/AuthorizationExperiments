@@ -1,8 +1,9 @@
-﻿using AuthorizationExperiment.Api.Base.Connections;
+﻿// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using AuthorizationExperiment.Api.Base.Connections;
 using AuthorizationExperiment.Api.Base.Extensions;
 using AuthorizationExperiment.Api.Base.Query;
 using System.Data;
-using System.Data.Common;
 
 namespace AuthorizationExperiment.Api.Services.Application
 {
@@ -46,7 +47,7 @@ namespace AuthorizationExperiment.Api.Services.Application
         {
             using (var connection = await _connectionFactory.GetDbConnectionAsync(cancellationToken).ConfigureAwait(false))
             {
-                var query = new SqlQuery(connection).Proc("[Application].[usp_Task_Read]")
+                var query = new SqlQuery(connection).Proc("[Application].[usp_Task_ReadTask]")
                     .Param("TaskID", taskId)
                     .Param("UserID", userId);
 
@@ -71,7 +72,7 @@ namespace AuthorizationExperiment.Api.Services.Application
         {
             using (var connection = await _connectionFactory.GetDbConnectionAsync(cancellationToken).ConfigureAwait(false))
             {
-                var query = new SqlQuery(connection).Proc("[Application].[usp_Tasks_Read]")
+                var query = new SqlQuery(connection).Proc("[Application].[usp_Task_ReadTasks]")
                     .Param("UserID", userId);
 
                 var results = await query

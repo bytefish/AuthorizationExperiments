@@ -1,0 +1,1 @@
+﻿CREATE UNIQUE INDEX [UX_TaskStatus_Name] ON [Application].[TaskStatus] ([Name])
