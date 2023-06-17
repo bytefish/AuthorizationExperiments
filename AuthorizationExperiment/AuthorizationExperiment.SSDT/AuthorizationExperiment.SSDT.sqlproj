@@ -84,8 +84,8 @@
     <PostDeploy Include="Scripts\Script.PostDeployment1.sql" />
     <None Include="Scripts\Application\pds-100-ins-application-task-priority.sql" />
     <None Include="Scripts\Application\pds-110-ins-application-task-status.sql" />
-    <Build Include="Application\Indexes\UX_Tasks_TaskPriority_Name.sql" />
-    <Build Include="Application\Indexes\UX_Tasks_TaskStatus_Name.sql" />
+    <Build Include="Application\Indexes\UX_TaskPriority_Name.sql" />
+    <Build Include="Application\Indexes\UX_TaskStatus_Name.sql" />
     <Build Include="Application\Sequences\sq_Task.sql" />
     <Build Include="Application\Stored Procedures\usp_Task_Create.sql" />
     <Build Include="Application\Stored Procedures\usp_Task_Delete.sql" />
@@ -98,7 +98,7 @@
     <Build Include="Application\Tables\TaskStatus.sql" />
     <Build Include="Application\Application.sql" />
     <None Include="Scripts\Identity\pds-110-ins-identity-relation-tuples.sql" />
-    <Build Include="Identity\Indexes\UX_RelationTuple_ObjectKey_ObjectNamespace_ObjectRelation_SubjectKey_SubjectNamespace_SubjectRelation.sql" />
+    <Build Include="Identity\Indexes\UX_RelationTuple_UniqueTuple.sql" />
     <Build Include="Identity\Functions\udf_RelationTuples_Check.sql" />
     <Build Include="Identity\Functions\tvf_RelationTuples_ListObjects.sql" />
     <Build Include="Application\Stored Procedures\usp_Task_ReadTasks.sql" />
